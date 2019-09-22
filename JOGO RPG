@@ -3,60 +3,294 @@
 #include <time.h>
 #include <string.h>
 
-void informacao(char Nome1[10], char Nome2[10], int Forca1, int Forca2, int Resistencia1, int Resistencia2, int Mobilidade1, int Mobilidade2){
-        printf("Dados do Jogador 1 \t\tDados do Jogador 2\n\n");
-        printf("Nome: %s\t\t\t||\tNome: %s\n", Nome1, Nome2);
-        printf("Pontos de Forca: %d\t\t||\tPontos de Forca: %d\n", Forca1, Forca2);
-        printf("Pontos de Resistencia: %d\t||\tPontos de Resistencia: %d\n", Resistencia1, Resistencia2);
-        printf("Pontos de Mobilidade: %d\t||\tPontos de Mobilidade: %d\n", Mobilidade1, Mobilidade2);
 
+char Nomes(char Nome1[10], char Nome2[10]){
+        printf("\t\t     ***** RPG por Turnos *****\n");
+        printf("\t\t***** INFORMACOES DOS JOGADORES *****\n\n");
+        printf("Jogador 1 \t\t\t\tJogador 2\n\n");
+        printf("Nome: %s\t\t\t||\tNome: %s\n", Nome1, Nome2);
+return 0;
+}
+
+int Pontos(int Vida1, int Forca1, int Resistencia1, int Mobilidade1, int Vitorias1, int Vida2, int Forca2, int Resistencia2, int Mobilidade2, int Vitorias2){
+
+                printf("Pontos de Vida: %d\t\t||\tPontos de Vida: %d\n", Vida1, Vida2);
+                printf("Pontos de Forca: %d\t\t||\tPontos de Forca: %d\n", Forca1, Forca2);
+                printf("Pontos de Resistencia: %d\t||\tPontos de Resistencia: %d\n", Resistencia1, Resistencia2);
+                printf("Pontos de Mobilidade: %d \t||\tPontos de Mobilidade: %d\n", Mobilidade1, Mobilidade2);
+                printf("Vitorias: %d\t\t\t||\tVitorias: %d\n", Vitorias1, Vitorias2);
+return 0;
 }
 
 int main(){
 
-char Nome1[10], Nome2[10];
-int Vinda1, Forca1, Resistencia1, Mobilidade1, Ataque1, Defesa1, Esquiva1;
-int Vinda2, Forca2, Resistencia2, Mobilidade2, Ataque2, Defesa2, Esquiva2;
-int i,j, vez=0;
-    // Prenchimeto dos dados do primeiro jogador
-    printf("\tPrenchimento dos Dados\n");
-    printf("\t\tJogador 1\n");
-    printf("Digite o Nome:\n");
-    scanf("%s", Nome1);
-    system("clear");
+char jogada1[1], jogada2[1], rpg[3], escolha[1], voltar[1];
+int Vida1=100, Forca1, Resistencia1, Mobilidade1, Ataque1, Defesa1, Esquiva1, Vitorias1=0, diferenca1, dado1;
+int Vida2=100, Forca2, Resistencia2, Mobilidade2, Ataque2, Defesa2, Esquiva2, Vitorias2=0, diferenca2, dado2;
+int vez, ataca=0;
+
+srand ( time(NULL) );
+
+
+
+
+
+
+
+            char Nome1[10] = "Em banco";
+			char Nome2[10] = "Em banco";
+			Vida2= 100;
+			Vida1= 100;
+			Forca1=Resistencia1=Mobilidade1=Ataque1=Defesa1=Esquiva1=0;
+            Forca2=Resistencia2=Mobilidade2=Ataque2=Defesa2=Esquiva2=0;
+
+
+
+
+            // Chama a função Nomes e Pontos
+            Nomes(Nome1,Nome2);
+            Pontos(Vida1, Forca1, Resistencia1, Mobilidade1, Vitorias1, Vida2, Forca2, Resistencia2, Mobilidade2, Vitorias2);
+
+            // PREENCHIMENTO DOS DADOS DO JOGADOR 1
+
+            printf("\nDigite o Nome:\n");
+            scanf("%s", Nome1);
+            system("clear");
+
 
     do{
-        printf("\tPrenchimento dos Dados\n");
-        printf("\t\tJogador 1\n");
-        printf("Nome: %s\n\n", Nome1);
-        printf("Digite os Pontos de Forca:\n");
-        printf("Permitido somente 20 pontos para distribuicao.\n");
-            scanf("%d", &Forca1);            
+            // Chama a função Nomes e Pontos
+            Nomes(Nome1,Nome2);
+            Pontos(Vida1, Forca1, Resistencia1, Mobilidade1, Vitorias1, Vida2, Forca2, Resistencia2, Mobilidade2, Vitorias2);
+
+            printf("\nDigite os Pontos de Forca:\n");
+            printf("ATENCAO!!! Permitido ate 20 pontos para distribuicao.\n");
+            scanf("%d", &Forca1);
             system("clear");
-     }while(Forca1 > 20 || Forca1 < 0 || getchar()!='\n'); // O laco vai repetir enquanto a Forca1 for maior que 20 pontos ou quando o usuario digitar um caractere.
+
+            // O laco vai repetir enquanto a Forca1 for maior que 20 pontos ou quando o usuario digitar um caractere.
+     }while(Forca1 > 20 || Forca1 < 0 || getchar()!='\n');
+
     do{
-        printf("\tPrenchimento dos Dados\n");
-        printf("\t\tJogador 1\n");
-        printf("Nome: %s\n", Nome1);
-        printf("Digite os Pontos de Forca: %d\n\n",Forca1);
-        printf("Digite os Pontos de Resistência:\n");
-        printf("Permitido somente %d pontos para distribuicao.\n", 20-Forca1);
+            // Chama a função Nomes e Pontos
+            Nomes(Nome1,Nome2);
+            Pontos(Vida1, Forca1, Resistencia1, Mobilidade1, Vitorias1, Vida2, Forca2, Resistencia2, Mobilidade2, Vitorias2);
+
+            printf("\nDigite os Pontos de Resistência:\n");
+            printf("ATENCAO!!! Permitido ate %d pontos para distribuicao.\n", 20-Forca1);
             scanf("%d", &Resistencia1);
+            Mobilidade1 = 20 - (Forca1 + Resistencia1);
             system("clear");
-    }while(Resistencia1 > (20 - Forca1) || Resistencia1 < 0 || getchar()!='\n');
-do{ 
-        printf("\tPrenchimento dos Dados\n");
-        printf("\t\tJogador 1\n");
-        printf("Nome: %s\n", Nome1);
-        printf("Pontos de Forca: %d\n",Forca1);
-        printf("Pontos de Resistência: %d\n\n", Resistencia1);
-        printf("Digite os Pontos de Mobilidade: \n");
-        printf("Permitido somente %d pontos para distribuicao.\n", 20-(Forca1 + Resistencia1));
-            scanf("%d", &Mobilidade1);
-            system("clear");
-    }while(Mobilidade1 != (20-(Forca1 + Resistencia1)) || getchar()!='\n');
- 
 
+    }while(getchar()!='\n' || (Resistencia1 > (20 - Forca1) || Resistencia1 < 0));
+
+    // PREENCHIMENTO DOS DADOS DO JOGADOR 2
+
+        // Chama a função Nomes e Pontos
+            Nomes(Nome1,Nome2);
+            Pontos(Vida1, Forca1, Resistencia1, Mobilidade1, Vitorias1, Vida2, Forca2, Resistencia2, Mobilidade2, Vitorias2);
+
+            printf("\nDigite o nome Jogador 2:\n");
+            scanf("%[a-z A-Z]s", Nome2);
+            system("clear");
+
+    do{
+            // Chama a função Nomes e Pontos
+            Nomes(Nome1,Nome2);
+            Pontos(Vida1, Forca1, Resistencia1, Mobilidade1, Vitorias1, Vida2, Forca2, Resistencia2, Mobilidade2, Vitorias2);
+
+            printf("\nDigite os Pontos de Forca:\n");
+            printf("ATENCAO!!! Permitido ate 20 pontos para distribuicao.\n");
+            scanf("%d", &Forca2);
+            system("clear");
+
+            // O laco vai repetir enquanto a Forca1 for maior que 20 pontos, quando o usuario digitar um caractere, ou numero negativo.
+     }while(Forca2 > 20 || Forca2 < 0 || getchar()!='\n');
+
+    do{
+            /// Chama a função Nomes e Pontos
+            Nomes(Nome1,Nome2);
+            Pontos(Vida1, Forca1, Resistencia1, Mobilidade1, Vitorias1, Vida2, Forca2, Resistencia2, Mobilidade2, Vitorias2);
+
+            printf("\nDigite os Pontos de Resistência:\n");
+            printf("ATENCAO!!! Permitido ate %d pontos para distribuicao.\n", 20-Forca2);
+            scanf("%d", &Resistencia2);
+            Mobilidade2 = 20 - (Forca2 + Resistencia2);
+            system("clear");
+
+    }while(getchar()!='\n' || (Resistencia2 > (20 - Forca2) || Resistencia2 < 0));
+
+do{
+
+        do{
+
+        /*printf("Digite RPG >>> ");
+        scanf("%s",rpg);
+   */
+        printf("\n\tJogador: 1\t\tJogador: 2\n");
+        printf("\n\t%s\t\t%s\n", Nome1, Nome2);
+        dado1= rand() % 11 + 1;
+        dado2= rand() % 11 + 1;
+        printf("\tFace do Dado: %d\t\tFace do Dado: %d\n\n", dado1, dado2);
+
+
+       }while(dado1 == dado2);
+
+        if(dado1 > dado2){
+        printf("\nParabens %s voce inicia o JOGO RPG\n", Nome1);
+        ataca = 0;
+        }else{
+        printf("\nParabens %s voce inicia o JOGO RPG\n", Nome2);
+        ataca = 1;
+        }
+
+        printf("\n\nObs.: A rodada inicia quando um jogador obtiver maior ponto no dado.\n\n");
+        vez = ataca;
+
+        printf("Começando a Batalha!\n\n");
+do {
+
+			if (vez % 2 == 0){
+				printf("%s ataca!\n", Nome1);
+				printf("%s, [D]efende ou [E]squiva? ", Nome2);
+				do{
+				    scanf("%s",escolha);
+				            if (escolha[0] != 'D' && escolha[0] != 'd' && escolha[0] != 'E' && escolha[0] != 'e')
+				                  printf("Digite a letra correta!\n");
+
+				   }while(escolha[0] != 'D' && escolha[0] != 'd' && escolha[0] != 'E' && escolha[0] != 'e');
+
+				dado1 = rand() % 12 + 1;
+				Ataque1 = Forca1 * dado1;
+                printf("Dado %s: %d => Pontos de Ataque %d\n", Nome1, dado1, Ataque1);
+                     if(escolha[0] == 'D' || escolha[0] == 'd'){
+                            dado2 = rand() % 12 + 1;
+				            Defesa2 = Resistencia2 * dado2;
+		        		    printf("Dado %s: %d => Pontos de Defesa %d\n", Nome2, dado2, Defesa2);
+				                if (Defesa2 < Ataque1){
+				                    diferenca2 = Ataque1 - Defesa2;
+				                    Vida2 = Vida2 - diferenca2;
+		                            if(Vida2 > 0){
+		                                printf("Dano em %s: %d  => Pontos de Vida %d\n\n", Nome2, diferenca2, Vida2);}
+		                            else{
+		                                printf("Dano em %s: %d  => Pontos de Vida 0\n\n", Nome2, diferenca2);}
+		        		           }
+		        		       else
+		                            if(Vida2 > 0)
+		                                printf("Dano em %s: ZERO  => Pontos de Vida %d\n\n", Nome2, Vida2);
+		                            else
+		                                printf("Dano em %s: ZERO  => Pontos de Vida 0\n\n", Nome2);
+
+		               }
+				     else{
+                            dado2 = rand() % 12 + 1;
+				            Esquiva2 = Mobilidade2 * dado2;
+		        		    printf("Dado %s: %d => Pontos de Esquiva %d\n", Nome2, dado2, Esquiva2);
+			                    if (Esquiva2 < Ataque1){
+				                    Vida2 = Vida2 - Ataque1;
+		        		            if(Vida2 > 0)
+		        		            printf("Dano em %s: %d  => Pontos de Vida %d\n\n", Nome2, Ataque1, Vida2);
+		        		            else
+		        		            printf("Dano em %s: %d  => Pontos de Vida 0\n\n", Nome2, Ataque1);
+		                            }
+		                       else{
+		                            if(Vida1 > 0)
+		                                printf("Dano em %s: ZERO  => Pontos de Vida %d\n\n", Nome2, Vida2);
+		                            else
+		                                printf("Dano em %s: ZERO  => Pontos de Vida 0\n\n", Nome2);
+	                                }
+
+
+	                          if (escolha[0] == 'D' || escolha[0] == 'd')
+				                    escolha[0] == ' ';
+			                    else
+				                    escolha[0] == ' ';
+
+	       }
+
+	          }
+
+	       else{
+				printf("%s ataca!\n", Nome2);
+				printf("%s, [D]efende ou [E]squiva? ", Nome1);
+				do{
+				    scanf("%s",escolha);
+				            if (escolha[0] != 'D' && escolha[0] != 'd' && escolha[0] != 'E' && escolha[0] != 'e')
+				                  printf("Digite a letra correta!\n");
+
+				   }while(escolha[0] != 'D' && escolha[0] != 'd' && escolha[0] != 'E' && escolha[0] != 'e');
+
+				dado2 = rand() % 11 + 1;
+				Ataque2 = Forca2 * dado2;
+                printf("Dado %s: %d => Pontos de Ataque %d\n", Nome2, dado2, Ataque2);
+                     if(escolha[0] == 'D' || escolha[0] == 'd'){
+                            dado1 = rand() % 12 + 1;
+				            Defesa1 = Resistencia1 * dado1;
+		        		    printf("Dado %s: %d => Pontos de Defesa %d\n", Nome1, dado1, Defesa1);
+				                if (Defesa1 < Ataque2){
+				                    diferenca1 = Ataque2 - Defesa1;
+				                    Vida1 = Vida1 - diferenca1;
+		        		            if(Vida1 > 0)
+		                                printf("Dano em %s: %d  => Pontos de Vida %d\n\n", Nome1, diferenca1, Vida1);
+		                            else {
+		                                printf("Dano em %s: %d  => Pontos de Vida 0\n\n", Nome1, diferenca1);}
+		        		           }
+		        		       else{
+		                            if(Vida1 > 0)
+		                                printf("Dano em %s: ZERO  => Pontos de Vida %d\n\n", Nome1, Vida1);
+		                            else
+		                                printf("Dano em %s: ZERO  => Pontos de Vida 0\n\n", Nome1);
+	                                }
+		               }
+				     else{
+                            dado1 = rand() % 12 + 1;
+				            Esquiva1 = Mobilidade1 * dado1;
+		        		    printf("Dado %s: %d => Pontos de Esquiva %d\n", Nome1, dado1, Esquiva1);
+			                    if (Esquiva1 < Ataque2){
+				                    Vida1 = Vida1 - Ataque2;
+				                    if(Vida1 > 0)
+		        		            printf("Dano em %s: %d  => Pontos de Vida %d\n\n", Nome1, Ataque2, Vida1);
+		        		            else
+		        		            printf("Dano em %s: %d  => Pontos de Vida 0\n\n", Nome1, Ataque2);
+		                            }
+		                       else{
+		                            if(Vida1 > 0)
+		                                printf("Dano em %s: ZERO  => Pontos de Vida %d\n\n", Nome1, Vida1);
+		                            else{
+		                                printf("Dano em %s: ZERO  => Pontos de Vida 0\n\n", Nome1);}
+	                                }
+
+
+	                            if (escolha[0] == 'D' || escolha[0] == 'd')
+				                    escolha[0] == ' ';
+			                    else
+				                    escolha[0] == ' ';
+
+			}}
+
+			vez++;
+
+
+
+		} while( Vida1 > 1 && Vida2 > 1);
+
+        if ( Vida1 > Vida2 ){
+		printf("%s venceu!!!!!!!!!!!\n\n", Nome1);
+		Vitorias1++;}
+		else{
+		printf("%s venceu!!!!!!!!!!!\n\n", Nome2);
+		Vitorias2++;}
+        do{
+        printf("\nVamos jogar novamente?\n");
+        printf("[1] Sim ou [2] Não\n");
+		scanf("%s", voltar);
+
+		}while(voltar[0] != '1' && voltar[0] != '2' || getchar()!='\n');
+		system("clear");
+
+}while(voltar[0] == '1' || getchar()!='\n');
+
+system("Pause");
 
 return 0;
 }
